@@ -1,0 +1,25 @@
+.wrapper {
+    display: flex;
+    height: 100vh; /* Full height of the viewport */
+}
+
+.modal-container {
+    flex: 1; /* Modal container takes half of the screen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Take up all the height */
+}
+
+.container {
+    flex: 1; /* Image container takes half of the screen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Take up all the height */
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
