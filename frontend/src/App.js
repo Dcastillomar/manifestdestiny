@@ -3,6 +3,8 @@ import { Modal, Form } from 'react-bootstrap';
 import './style.css';
 import pic from './covered-wagon-2967229_1280.png';
 
+const totalQuestions = 9;
+
 const App = () => {
     const [text, setText] = useState('');
     const [question, setQuestion] = useState('');
@@ -24,13 +26,18 @@ const App = () => {
                 body: JSON.stringify({}),
             });
             const data = await response.json();
-            setQuestion(data.question);
-            setOutcomes(data.answers.join(', '));
-            setAskedQuestions([...askedQuestions, data.question]);
+            if (data.question !== null && data.answers !== null) {
+                setQuestion(data.question); // Update the question state with the fetched question
+                setOutcomes(data.answers.join(', '));
+                setAskedQuestions([...askedQuestions, data]);
+            } else {
+                console.error('Received null question or answers:', data);
+            }
         } catch (error) {
             console.error('Error fetching next question:', error);
         }
     };
+
 
     useEffect(() => {
         if (gameState === 'playing') {
@@ -56,17 +63,23 @@ const App = () => {
             const data = await response.json();
             setQuestion(data.question);
             setOutcomes(data.answers.join(', '));
-            setUsedQuestions([...usedQuestions, data.question]); // Add the used question to the list
-            
+            if (data.question !== null && data.question !== undefined) {
+                setAskedQuestions([...askedQuestions, data.question]); // Add the new question to the existing array if it's not null
+            }            
             // Assign random health changes based on the user's response
             const healthChange = getRandomHealthChange();
             const newHealthScore = Math.max(0, Math.min(10, healthScore + healthChange));
             setHealthScore(newHealthScore);
-
+console.log(askedQuestions)
             if (newHealthScore <= 0) {
                 setOutcome('You lost all your health points!');
-                setGameState('lost'); // Update game state
-            } else {
+                setGameState('lost'); // Update game state to 'lost'
+            } else if (askedQuestions.length === totalQuestions && newHealthScore > 0) {
+                
+                setOutcome('Congratulations! You won the game!');
+                setGameState('won'); // Update game state to 'won'
+            }
+            else {
                 setOutcome(`Your health ${healthChange >= 0 ? 'increased by' : 'decreased by'} ${Math.abs(healthChange)}.`);
             }
         } catch (error) {
@@ -92,24 +105,6 @@ const App = () => {
     const getRandomInt = (min, max) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     };
-
-    // const getNextQuestion = async () => {
-    //     try {
-    //         const response = await fetch('/submit', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify({}),
-    //         });
-    //         const data = await response.json();
-    //         setQuestion(data.question);
-    //         setOutcomes(data.answers.join(', '));
-    //         setAskedQuestions([...askedQuestions, data.question]);
-    //     } catch (error) {
-    //         console.error('Error fetching next question:', error);
-    //     }
-    // };
 
     const restartGame = () => {
         setGameState('playing');

@@ -45,32 +45,34 @@ questions = [
     }
 ]
 
-# Maintain a list of questions that have been asked
-asked_questions = []
-
 @app.route("/start")
 def start():
     return 'Start the game player'
+
+# Maintain a list of questions that have been asked
+asked_questions = []
 
 @app.route('/submit', methods=['POST'])
 def submit_form():
     global asked_questions
     
-    # Check if all questions have been asked
-    if len(asked_questions) == len(questions):
+    # Check if all questions have been asked or no available questions are left
+    if len(asked_questions) == len(questions) or not [q for q in questions if q not in asked_questions]:
         # Reset the list of asked questions
         asked_questions = []
-        return jsonify({'question': 'Congratulations! You won the game!', 'answers': []})
+        return jsonify({'question': None, 'answers': []})
 
+ # Filter out None values from the questions list
+    valid_questions = [q for q in questions if q is not None]
     # Randomly select a question that hasn't been asked yet
-    available_questions = [q for q in questions if q not in asked_questions]
+    available_questions = [q for q in valid_questions if q not in asked_questions]
+    print(available_questions)
     selected_question = random.choice(available_questions)
-    
     # Add the selected question to the list of asked questions
-    asked_questions.append(selected_question)
-    
+    if selected_question is not None:
+        asked_questions.append(selected_question)
+        print(selected_question)
     # Return the selected question and possible answers
     return jsonify({'question': selected_question['question'], 'answers': selected_question['answers']})
-
 if __name__ == "__main__":
     app.run(debug=True)
