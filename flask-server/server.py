@@ -52,6 +52,7 @@ def start():
 # Maintain a list of questions that have been asked
 asked_questions = []
 
+
 @app.route('/submit', methods=['POST'])
 def submit_form():
     global asked_questions
@@ -64,15 +65,15 @@ def submit_form():
 
  # Filter out None values from the questions list
     valid_questions = [q for q in questions if q is not None]
+    print(valid_questions)
     # Randomly select a question that hasn't been asked yet
     available_questions = [q for q in valid_questions if q not in asked_questions]
-    print(available_questions)
-    selected_question = random.choice(available_questions)
-    # Add the selected question to the list of asked questions
-    if selected_question is not None:
-        asked_questions.append(selected_question)
-        print(selected_question)
-    # Return the selected question and possible answers
-    return jsonify({'question': selected_question['question'], 'answers': selected_question['answers']})
+    if available_questions:
+            selected_question = random.choice(available_questions)
+            # Add the selected question to the list of asked questions
+            asked_questions.append(selected_question)
+            return jsonify({'question': selected_question['question'], 'answers': selected_question['answers']})
+    else:
+            return jsonify({'question': None, 'answers': []})
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Form } from 'react-bootstrap';
 import './style.css';
-import pic from './covered-wagon-2967229_1280.png';
+import backgroundImage from './pexels-ricky-esquivel-1683490.jpg';
 
 const totalQuestions = 9;
 
@@ -63,6 +63,7 @@ const App = () => {
             const data = await response.json();
             setQuestion(data.question);
             setOutcomes(data.answers.join(', '));
+            console.log(data)
             if (data.question !== null && data.question !== undefined) {
                 setAskedQuestions([...askedQuestions, data.question]); // Add the new question to the existing array if it's not null
             }            
@@ -118,7 +119,8 @@ console.log(askedQuestions)
     };
 
     return (
-        <div className="wrapper">
+        <div className="wrapper" style={{ padding: '10px'}}>
+            <div className="background-image">
             <div className="modal-container">
                 <Modal.Dialog>
                     <Modal.Header closeButton>
@@ -128,7 +130,7 @@ console.log(askedQuestions)
                     <Modal.Body>
                         {gameState === 'playing' ? (
                             <>
-                                <p>{question || 'Pick a number to start.'}</p>
+                                <p>{question|| 'Are you lucky?'}</p>
                                 <form onSubmit={handleSubmit}>
                                     <Form.Label htmlFor="userResponse">Your Response:</Form.Label>
                                     <Form.Control
@@ -140,10 +142,10 @@ console.log(askedQuestions)
                                     />
                                     {errorMessage && <p className="text-danger">{errorMessage}</p>}
                                     <p>{outcomes}</p>
-                                    <Form.Text id="userResponseBlock" muted>
+                                    <Form.Text id="userResponseBlock" muted style={{ paddingRight: '15px'}}>
                                         Pick 1, 2, 3, 4
                                     </Form.Text>
-                                    <button type="submit" className="btn btn-primary mt-2">Submit</button>
+                                    <button type="submit" className="btn btn-primary mt-2" >Submit</button>
                                 </form>
                             </>
                         ) : (
@@ -163,10 +165,7 @@ console.log(askedQuestions)
                     </Modal.Footer>
                 </Modal.Dialog>
             </div>
-
-            <div className='container'>
-                <img src={pic} alt="Logo" className="centered-image" />
-            </div>
+        </div>
         </div>
     );
 }
