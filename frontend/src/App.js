@@ -73,15 +73,15 @@ const App = () => {
             setHealthScore(newHealthScore);
 console.log(askedQuestions)
             if (newHealthScore <= 0) {
-                setOutcome('You lost all your health points!');
+                setOutcome('You lost all your health points! ');
                 setGameState('lost'); // Update game state to 'lost'
             } else if (askedQuestions.length === totalQuestions && newHealthScore > 0) {
                 
-                setOutcome('Congratulations! You won the game!');
+                setOutcome('Congratulations! You won the game! ');
                 setGameState('won'); // Update game state to 'won'
             }
             else {
-                setOutcome(`Your health ${healthChange >= 0 ? 'increased by' : 'decreased by'} ${Math.abs(healthChange)}.`);
+                setOutcome(`Your health ${healthChange >= 0 ? 'increased by ' : 'decreased by '} ${Math.abs(healthChange)}.`);
             }
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -150,7 +150,7 @@ console.log(askedQuestions)
                             </>
                         ) : (
                             <div>
-                                <p>{gameState === 'won' ? 'Congratulations! You won the game!' : 'You lost the game!'}</p>
+                                <p>{gameState === 'won' ? 'Congratulations! You won the game! ' : 'You lost the game! '}</p>
                                 <button className="btn btn-primary mt-2" onClick={restartGame}>
                                     {gameState === 'won' ? 'Restart the Game' : 'Restart Game'}
                                 </button>
