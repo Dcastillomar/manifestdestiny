@@ -2,12 +2,8 @@ import random
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-app = Flask(__name__,static_folder="../build", static_url_path='/')
+app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
-
-@app.route('/')
-def index():
-        return app.send_static_file('index.html')
 
 # Define questions and outcomes
 questions = [
@@ -79,5 +75,8 @@ def submit_form():
             return jsonify({'question': selected_question['question'], 'answers': selected_question['answers']})
     else:
             return jsonify({'question': None, 'answers': []})
+
 if __name__ == "__main__":
-    app.run(debug=True)
+   if __name__ == "__main__":
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
