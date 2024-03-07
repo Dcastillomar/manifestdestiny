@@ -2,8 +2,12 @@ import random
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder="../build", static_url_path='/')
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+
+@app.route('/')
+def index():
+        return app.send_static_file('index.html')
 
 # Define questions and outcomes
 questions = [
