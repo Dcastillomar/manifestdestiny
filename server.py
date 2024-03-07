@@ -46,7 +46,7 @@ questions = [
     }
 ]
 
-@app.route("/start")
+@app.route("/")
 def start():
     return 'Start the game player'
 
