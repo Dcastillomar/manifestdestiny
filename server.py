@@ -3,8 +3,12 @@ import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static', static_folder='static')
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
 
 # Define questions and outcomes
 questions = [
@@ -46,7 +50,7 @@ questions = [
     }
 ]
 
-@app.route("/")
+@app.route("/start")
 def start():
     return 'Start the game player'
 
@@ -77,7 +81,7 @@ def submit_form():
     else:
             return jsonify({'question': None, 'answers': []})
 
+
 if __name__ == "__main__":
-   if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)
