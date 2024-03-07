@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.3.3",
+    "flask": "^0.2.10",
     "gh-pages": "^5.0.0",
     "react": "^17.0.2",
     "react-bootstrap": "^2.10.1",
