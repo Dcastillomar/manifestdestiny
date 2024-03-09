@@ -1,14 +1,20 @@
 import random
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, send_file, jsonify
 from flask_cors import CORS
 
-app = Flask(__name__, static_url_path='/static', static_folder='static')
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+app = Flask(__name__, static_folder='build', static_url_path='/')
+CORS(app)
 
 @app.route('/')
 def index():
-    return app.send_static_file('index.html')
+    # Flask will automatically serve the index.html file from the static folder
+    return send_file('build/index.html')
+
+# Serve static assets (JavaScript, CSS, images, etc.)
+@app.route('/static/<path:path>')
+def serve_static(path):
+    return send_file(os.path.join(app.static_folder, 'static', path))
 
 # Define questions and outcomes
 questions = [
