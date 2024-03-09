@@ -3,13 +3,13 @@ import os
 from flask import Flask, send_file, jsonify
 from flask_cors import CORS
 
-app = Flask(__name__, static_folder='build', static_url_path='/')
+app = Flask(__name__, static_folder='public', static_url_path='/')
 CORS(app)
 
 @app.route('/')
 def index():
     # Flask will automatically serve the index.html file from the static folder
-    return send_file('build/index.html')
+    return send_file('public/index.html')
 
 # Serve static assets (JavaScript, CSS, images, etc.)
 @app.route('/static/<path:path>')
