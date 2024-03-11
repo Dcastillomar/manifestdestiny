@@ -6,7 +6,11 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "https://manifestdestiny-5fa35ccf64ad.herokuapp.com"}})
 
 def index():
-     return render_template('index.html')
+    return render_template('index.html')
+
+@app.route("/")
+def home():
+    return index()
 
 @app.route("/static/<path:path>")
 def static_proxy(path):
