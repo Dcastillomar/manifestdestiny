@@ -1,20 +1,9 @@
 import random
-import os
-from flask import Flask, send_file, jsonify
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-app = Flask(__name__, static_folder='public', static_url_path='/')
-CORS(app)
-
-@app.route('/')
-def index():
-    # Flask will automatically serve the index.html file from the static folder
-    return send_file('public/index.html')
-
-# Serve static assets (JavaScript, CSS, images, etc.)
-@app.route('/static/<path:path>')
-def serve_static(path):
-    return send_file(os.path.join(app.static_folder, 'static', path))
+app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 # Define questions and outcomes
 questions = [
@@ -86,8 +75,5 @@ def submit_form():
             return jsonify({'question': selected_question['question'], 'answers': selected_question['answers']})
     else:
             return jsonify({'question': None, 'answers': []})
-
-
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(debug=True)

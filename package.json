@@ -9,7 +9,6 @@
     "@testing-library/user-event": "^13.5.0",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.3.3",
-    "flask": "^0.2.10",
     "gh-pages": "^5.0.0",
     "react": "^17.0.2",
     "react-bootstrap": "^2.10.1",
@@ -21,9 +20,9 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "webpack serve --mode development",
+    "start": "react-scripts start",
     "start-api": "cd flask-server && venv/bin/flask run --no-debugger",
-    "build": "webpack --mode production",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

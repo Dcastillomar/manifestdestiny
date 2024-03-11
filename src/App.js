@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Form } from 'react-bootstrap';
-import '../public/style.css';
-import backgroundImage from '../public/pexels-ricky-esquivel-1683490.jpg';
+import './style.css';
+import backgroundImage from './pexels-ricky-esquivel-1683490.jpg';
 
 const totalQuestions = 9;
 
