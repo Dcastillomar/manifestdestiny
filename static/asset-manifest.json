@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7fd16c7a.css",
+    "main.js": "/static/js/main.0fa2b979.js",
+    "static/media/pexels-ricky-esquivel-1683490.jpg": "/static/media/pexels-ricky-esquivel-1683490.2bcecb9d250609d282ab.jpg",
+    "index.html": "/index.html",
+    "main.7fd16c7a.css.map": "/static/css/main.7fd16c7a.css.map",
+    "main.0fa2b979.js.map": "/static/js/main.0fa2b979.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7fd16c7a.css",
+    "static/js/main.0fa2b979.js"
+  ]
+}

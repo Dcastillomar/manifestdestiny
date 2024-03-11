@@ -1,9 +1,17 @@
 import random
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "https://manifestdestiny-5fa35ccf64ad.herokuapp.com"}})
+
+def index():
+     return render_template('index.html')
+
+@app.route("/static/<path:path>")
+def static_proxy(path):
+    # send_static_file will guess the correct MIME type
+    return app.send_static_file(path)
 
 # Define questions and outcomes
 questions = [
