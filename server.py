@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:5000"}})
+CORS(app, resources={r"/*": {"origins": "https://manifestdestiny-5fa35ccf64ad.herokuapp.com"}})
 
 # Define questions and outcomes
 questions = [
