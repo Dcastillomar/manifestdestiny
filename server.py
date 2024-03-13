@@ -37,7 +37,7 @@ questions = [
         'answers': ['1. Everyone attacks', '2. Everyone Defends', '3.You go into a blood rage and start attacking everything in sight with +50 added to your strength', '4. You and your party run away']
     },
     {
-        'question': 'One of your team members starts asking suspicious',
+        'question': 'One of your team members starts acting suspicious',
         'answers': ['1. You confront them', '2. You pretend nothing is wrong, maybe they will reveal to you later', '3. You pay extra close attention from now on', '4. You hold an intervention']
     },
     {
